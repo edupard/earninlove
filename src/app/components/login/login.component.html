@@ -1,0 +1,39 @@
+<div class="align-middle container ">
+  <form *ngIf="loginMode" [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
+    <div class="form-group">
+      <label for="email">
+        Email
+      </label>
+      <input id="email" type="email" class="form-control" formControlName="email" placeholder="name@example.com">
+      <p *ngIf="emailNotConfirmed" class="text-danger">Email not confirmed, please ask admin@earninlove.com</p>
+      <p *ngIf="userNonFound" class="text-danger">Email is not registered</p>
+    </div>
+
+    <div class="form-group">
+      <label for="password">
+        Password
+      </label>
+      <input id="password" type="password" class="form-control" formControlName="password">
+      <p *ngIf="incorrectPassword" class="text-danger">Incorrect password</p>
+      <p *ngIf="resetPasswordRequired" class="text-danger">Pasword was reset please ask admin@earninlove.com</p>
+    </div>
+    <div class="form-group">
+      <p *ngIf="genericError" class="text-danger">Error happened, please try later or ask admin@earninlove.com</p>
+    </div>
+    <button class="btn btn-primary" type="submit">Login</button>
+  </form>
+
+
+  <form *ngIf="setPasswordMode" [formGroup]="setPasswordForm" (ngSubmit)="onChangePassword(setPasswordForm.value)">
+    <div class="form-group">
+      <label for="password">
+        Password
+      </label>
+      <input id="newPassword" type="password" class="form-control" formControlName="password">
+    </div>
+    <div class="form-group">
+      <p *ngIf="genericError" class="text-danger">Error happened, please try later or ask admin@earninlove.com</p>
+    </div>
+    <button class="btn btn-primary" type="submit">Set password</button>
+  </form>
+</div>
