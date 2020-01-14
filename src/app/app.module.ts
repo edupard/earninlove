@@ -5,19 +5,21 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
-import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { AmplifyService } from 'aws-amplify-angular';
 import { BookComponent } from './components/book/book.component';
+import { SetPasswordComponent } from './components/set-password/set-password.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    BookComponent
+    BookComponent,
+    SetPasswordComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AmplifyAngularModule,
+//     AmplifyAngularModule,
     ReactiveFormsModule,
   ],
   providers: [
