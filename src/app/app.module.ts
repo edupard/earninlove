@@ -8,6 +8,8 @@ import { LoginComponent } from './components/login/login.component';
 import { AmplifyService } from 'aws-amplify-angular';
 import { BookComponent } from './components/book/book.component';
 import { SetPasswordComponent } from './components/set-password/set-password.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { ForgotPasswordConfirmComponent } from './components/forgot-password-confirm/forgot-password-confirm.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +17,8 @@ import { SetPasswordComponent } from './components/set-password/set-password.com
     LoginComponent,
     BookComponent,
     SetPasswordComponent,
+    ForgotPasswordComponent,
+    ForgotPasswordConfirmComponent,
   ],
   imports: [
     BrowserModule,

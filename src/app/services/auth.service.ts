@@ -8,20 +8,44 @@ import Auth from '@aws-amplify/auth';
 export class AuthService {
 
   private user;
+  private forgottenEmail;
 
   constructor() { }
 
-  public getSmth() {
-    return 'Hello world';
+  public getForgottenEmail() {
+    return this.forgottenEmail;
   }
 
-  async setPassword(password) {
+  async setPassword(password): Promise<ErrorType> {
     try {
       this.user = await Auth.completeNewPassword(
           this.user,
           password,
           {}
       );
+      return ErrorType.None
+    }
+    catch (err) {
+      console.log(err);
+      return ErrorType.Generic;
+    }
+  }
+
+  async forgotPasswordConfirm(email, code, password) {
+    try {
+      await Auth.forgotPasswordSubmit(email, code, password);
+      return ErrorType.None
+    }
+    catch (err) {
+      console.log(err);
+      return ErrorType.Generic;
+    }
+  }
+
+  async forgotPassword(email) {
+    try {
+    this.forgottenEmail = email;
+      await Auth.forgotPassword(email);
       return ErrorType.None
     }
     catch (err) {

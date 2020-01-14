@@ -5,11 +5,11 @@ import { ErrorType } from './../../types'
 import { AuthService } from './../../services/auth.service'
 
 @Component({
-  selector: 'login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'forgot-password-confirm',
+  templateUrl: './forgot-password-confirm.component.html',
+  styleUrls: ['./forgot-password-confirm.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class ForgotPasswordConfirmComponent implements OnInit {
 
   public ErrorType = ErrorType;
   public error: ErrorType = ErrorType.None
@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
     private auth: AuthService,
   ) {
     this.form = this.formBuilder.group({
-      email: '',
+    email: auth.getForgottenEmail(),
+      code: '',
       password: ''
     });
   }
@@ -30,16 +31,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
-  async onLogin(data) {
-    this.error = await this.auth.login(data.email, data.password);
+  async onForgotPasswordConfirm(data) {
+    this.error = await this.auth.forgotPasswordConfirm(data.email, data.code, data.password);
     if (this.error === ErrorType.None)
     {
       this.router.navigateByUrl('');
     }
-    else if (this.error === ErrorType.NewPasswordRequired) {
-      this.router.navigateByUrl('setPassword');
-    }
   }
-
 
 }

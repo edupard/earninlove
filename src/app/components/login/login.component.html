@@ -1,7 +1,8 @@
 <div class="container h-100">
   <div class="row justify-content-center h-100">
     <div class="col-12 col-sm-10 col-md-6 col-lg-4 align-self-center">
-      <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
+      <h5 style="text-align:center">Earninlove login</h5>
+      <form [formGroup]="form" (ngSubmit)="onLogin(form.value)">
         <div class="form-group">
           <label for="email">
             Email
@@ -24,6 +25,9 @@
             admin@earninlove.com</p>
           <p *ngIf="error === ErrorType.Generic" class="text-danger">Error happened, please try later or ask
             admin@earninlove.com</p>
+          <p>
+            <a [routerLink]="['/forgotPassword']">Forgot password</a>
+          </p>
         </div>
         <button class="btn btn-primary" type="submit">Login</button>
       </form>

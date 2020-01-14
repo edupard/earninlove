@@ -11,17 +11,17 @@ import { ErrorType } from './../../types'
 })
 export class SetPasswordComponent implements OnInit {
 
-  public Errors = ErrorType;
+  public ErrorType = ErrorType;
   public error: ErrorType = ErrorType.None
 
-  public setPasswordForm;
+  public form;
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
     private auth: AuthService,
   ) {
-    this.setPasswordForm = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       password: ''
     });
   }
@@ -29,8 +29,8 @@ export class SetPasswordComponent implements OnInit {
   ngOnInit() {
   }
 
-  async onChangePassword(passwordData) {
-    this.error = await this.auth.setPassword(passwordData.password);
+  async onChangePassword(data) {
+    this.error = await this.auth.setPassword(data.password);
     if (this.error === ErrorType.None)
     {
       this.router.navigateByUrl('');
