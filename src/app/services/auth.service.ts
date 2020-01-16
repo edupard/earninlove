@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ErrorType } from './../types'
+import { ErrorType, User } from './../types'
 import Auth from '@aws-amplify/auth';
 
 @Injectable({
@@ -31,7 +31,7 @@ export class AuthService {
     }
   }
 
-  async forgotPasswordConfirm(email, code, password) {
+  async forgotPasswordConfirm(email, code, password): Promise<ErrorType> {
     try {
       await Auth.forgotPasswordSubmit(email, code, password);
       return ErrorType.None
@@ -42,7 +42,7 @@ export class AuthService {
     }
   }
 
-  async forgotPassword(email) {
+  async forgotPassword(email): Promise<ErrorType> {
     try {
     this.forgottenEmail = email;
       await Auth.forgotPassword(email);
@@ -52,6 +52,10 @@ export class AuthService {
       console.log(err);
       return ErrorType.Generic;
     }
+  }
+
+  public getCurrentUser(): Promise<User> {
+    return Auth.currentAuthenticatedUser({ bypassCache: false});
   }
 
   async login(email, password): Promise<ErrorType> {
