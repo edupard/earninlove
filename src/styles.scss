@@ -4,4 +4,8 @@ html, body {
     height: 100%;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @import "node_modules/bootstrap/scss/bootstrap.scss"

@@ -1,0 +1,54 @@
+@import "node_modules/bootstrap/scss/bootstrap.scss";
+
+p { text-indent: 2rem }
+
+.text-col {
+  @extend .col-11;
+  @extend .col-md-10;
+  @extend .col-lg-9;
+}
+
+.centered {
+  text-align: center;
+}
+
+.toc {
+  margin-top: 3rem;
+  margin-bottom: 5rem
+  }
+
+.toc ol, li {
+ list-style: none;
+}
+
+.toc, .toc ol {
+  padding-left: 0px;
+}
+
+.toc li {
+  margin-left: 1rem;
+}
+
+.toc-chapter {
+  font-weight: bold;
+}
+
+.chapter {
+  margin-top: 3rem;
+  text-align: center;
+}
+
+.section {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.signature{
+  text-align: right;
+  font-style: italic;
+}
+
+.duration{
+ font-style: italic;
+ text-align: left;
+}
