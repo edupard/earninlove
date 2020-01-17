@@ -18,7 +18,8 @@ phases:
         - ng build --${BUILD_ENV}
 
 artifacts:
+    base-directory:
     files:
-    - dist/**/*
-    discard-paths: yes
+    - '**/*'
+    discard-paths: no
     name: earninlove
