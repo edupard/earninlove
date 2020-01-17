@@ -1,11 +1,13 @@
 <div>
   <div>
-    <textarea style="width: 100%; min-height:10rem">{{text}}</textarea>
+    <textarea style="width: 100%; min-height:10rem" [(ngModel)]="text"></textarea>
   </div>
   <div>
     <button [attr.disabled]="progress ? true : null" class="btn btn-primary" (click)="onSubmit()">
       <i *ngIf="progress" class="fa fa-spinner fa-spin"></i>
       <i *ngIf="!progress" class="fa fa-check"></i>
+      <span></span>
+      Сохранить
     </button>
     <p *ngIf="error" class="text-danger">Произошла ошибка, попробуйте повторить попытку позже</p>
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service'
 import { HttpClient } from '@angular/common/http';
-import {SetTextCommand, GetTextCommand, GetTextCommandResponse, User} from '../types'
+import {SetTextCommand, GetTextCommand, GetTextCommandResponse, SetTextCommandResponse, User} from '../types'
 import { from, Observable } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
@@ -22,18 +22,18 @@ export class DataService {
     let user = from(this.auth.getCurrentUser());
 
     const proceed = flatMap((user: User) => {
-      let command: GetTextCommand = { user : user.attributes.email, ctrl : ctrl};
+      let command: GetTextCommand = { email : user.attributes.email, ctrl : ctrl};
       return this.http.post<GetTextCommandResponse>(`${this.apiUrl}/gettext`, command);
     });
     return proceed(user);
   }
 
-  setText(ctrl, text): Observable<any> {
+  setText(ctrl, text): Observable<SetTextCommandResponse> {
     let user = from(this.auth.getCurrentUser());
 
     const proceed = flatMap((user: User) => {
-      let command: GetTextCommand = { user : user.attributes.email, ctrl : ctrl};
-      return this.http.post<GetTextCommandResponse>(`${this.apiUrl}/settext`, command);
+      let command: SetTextCommand = { email : user.attributes.email, ctrl : ctrl, text: text};
+      return this.http.post<SetTextCommandResponse>(`${this.apiUrl}/settext`, command);
     });
     return proceed(user);
   }

@@ -22,10 +22,4 @@ export class BookComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
-  onInfo() {
-    Auth.currentSession()
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
-  }
-
 }

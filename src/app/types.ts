@@ -9,18 +9,22 @@ export enum ErrorType {
 }
 
 export interface SetTextCommand {
-  user: string;
+  email: string;
   ctrl: string;
   text: string;
 }
 
+export interface SetTextCommandResponse {
+  success: boolean;
+}
+
 export interface GetTextCommand {
-  user: string;
+  email: string;
   ctrl: string;
 }
 
 export interface GetTextCommandResponse {
-  user: string;
+  email: string;
   ctrl: string;
   text: string;
 }
