@@ -12,7 +12,6 @@ phases:
           nodejs : 12
         commands:
         - npm install -g @angular/cli
-        - ng build --${BUILD_ENV}
 
 build:
         commands:
