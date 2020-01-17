@@ -13,19 +13,31 @@ export class TextAreaComponent implements OnInit {
 
   public text;
   public error = false;
+  public progress = true;
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.data.getText(this.ctrl).subscribe((data: GetTextCommandResponse) => {
-      this.text = data.text;
+    this.progress = true;
+    this.data.getText(this.ctrl)
+    .subscribe(
+      data => { this.text = data.text; this.error = false; },
+      err => { this.error = true; }
+    )
+    .add(() => {
+      this.progress = false;
     });
   }
 
   onSubmit() {
-    this.data.setText(this.ctrl, this.text).subscribe({
-      next(data) { },
-      error(err) { this.error = true; }
+    this.progress = true;
+    this.data.setText(this.ctrl, this.text)
+    .subscribe(
+      data => { this.error = false; },
+      err => { this.error = true; }
+    )
+    .add(() => {
+      this.progress = false;
     });
   }
 

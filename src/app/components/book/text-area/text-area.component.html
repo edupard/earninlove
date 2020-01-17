@@ -3,6 +3,11 @@
     <textarea style="width: 100%; min-height:10rem">{{text}}</textarea>
   </div>
   <div>
-    <a href="#" class="btn btn-primary" (click)="onSubmit()">Сохранить</a>
+    <button [attr.disabled]="progress ? true : null" class="btn btn-primary" (click)="onSubmit()">
+      <i *ngIf="progress" class="fa fa-spinner fa-spin"></i>
+      <i *ngIf="!progress" class="fa fa-check"></i>
+    </button>
+    <p *ngIf="error" class="text-danger">Произошла ошибка, попробуйте повторить попытку позже</p>
+
   </div>
 </div>

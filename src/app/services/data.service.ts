@@ -10,7 +10,7 @@ import { flatMap } from 'rxjs/operators';
 })
 export class DataService {
 
- apiUrl = 'https://kgs6tnja5j.execute-api.us-east-1.amazonaws.com/prd'
+ apiUrl = 'https://fbq7kpo0t6.execute-api.us-east-1.amazonaws.com/prd'
 
   getUrl = 'assets/response.json';
   postUrl = "google.com"
@@ -23,7 +23,7 @@ export class DataService {
 
     const proceed = flatMap((user: User) => {
       let command: GetTextCommand = { user : user.attributes.email, ctrl : ctrl};
-      return this.http.post<GetTextCommandResponse>(`${this.apiUrl}/text`, command);
+      return this.http.post<GetTextCommandResponse>(`${this.apiUrl}/gettext`, command);
     });
     return proceed(user);
   }
@@ -33,7 +33,7 @@ export class DataService {
 
     const proceed = flatMap((user: User) => {
       let command: GetTextCommand = { user : user.attributes.email, ctrl : ctrl};
-      return this.http.post<GetTextCommandResponse>(`${this.apiUrl}/text`, command);
+      return this.http.post<GetTextCommandResponse>(`${this.apiUrl}/settext`, command);
     });
     return proceed(user);
   }
