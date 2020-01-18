@@ -38,8 +38,8 @@ export class DataService {
     return proceed(user);
   }
 
-  createUser(email): Observable<any> {
-    let command: CreateUserCommand = { email : email};
+  createUser(email, secret): Observable<CreateUserCommandResponse> {
+    let command: CreateUserCommand = { email : email, secret: secret };
     return this.http.post<CreateUserCommandResponse>(`${this.apiUrl}/createuser`, command);
   }
 }

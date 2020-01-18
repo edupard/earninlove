@@ -39,6 +39,7 @@ export interface User {
 
 export interface CreateUserCommand {
   email: string;
+  secret: string;
 }
 
 export interface CreateUserCommandResponse {

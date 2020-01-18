@@ -21,7 +21,8 @@ export class CreateUserComponent implements OnInit {
     private data: DataService,
   ) {
     this.form = this.formBuilder.group({
-      email: ''
+      email: '',
+      secret: '',
     });
   }
 
@@ -30,7 +31,7 @@ export class CreateUserComponent implements OnInit {
 
   async onCreateUser(data) {
     this.progress = true;
-    this.data.createUser(data.email)
+    this.data.createUser(data.email, data.secret)
     .subscribe(
       data => { this.error = ErrorType.None; },
       err => { this.error = ErrorType.Generic; }
