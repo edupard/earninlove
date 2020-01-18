@@ -19,6 +19,7 @@ phases:
 
 artifacts:
     files:
-    - dist/**/*
+    - - '**/*'
+    base-directory: 'dist'
     discard-paths: no
     name: earninlove

@@ -14,6 +14,7 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { ForgotPasswordConfirmComponent } from './components/forgot-password-confirm/forgot-password-confirm.component';
 import { TextAreaComponent } from './components/book/text-area/text-area.component';
 import { TokenInterceptor } from './auth/token.interceptor';
+import { CreateUserComponent } from './components/create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { TokenInterceptor } from './auth/token.interceptor';
     ForgotPasswordComponent,
     ForgotPasswordConfirmComponent,
     TextAreaComponent,
+    CreateUserComponent,
   ],
   imports: [
     BrowserModule,

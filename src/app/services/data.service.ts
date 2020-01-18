@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service'
 import { HttpClient } from '@angular/common/http';
-import {SetTextCommand, GetTextCommand, GetTextCommandResponse, SetTextCommandResponse, User} from '../types'
+import {SetTextCommand, GetTextCommand, GetTextCommandResponse, SetTextCommandResponse, User, CreateUserCommand, CreateUserCommandResponse} from '../types'
 import { from, Observable } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
@@ -36,5 +36,10 @@ export class DataService {
       return this.http.post<SetTextCommandResponse>(`${this.apiUrl}/settext`, command);
     });
     return proceed(user);
+  }
+
+  createUser(email): Observable<any> {
+    let command: CreateUserCommand = { email : email};
+    return this.http.post<CreateUserCommandResponse>(`${this.apiUrl}/createuser`, command);
   }
 }

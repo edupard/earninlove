@@ -36,3 +36,11 @@ export interface Attributes {
 export interface User {
   attributes: Attributes;
 }
+
+export interface CreateUserCommand {
+  email: string;
+}
+
+export interface CreateUserCommandResponse {
+  success: boolean;
+}

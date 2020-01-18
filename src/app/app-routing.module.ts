@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { SetPasswordComponent } from './components/set-password/set-password.component';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { ForgotPasswordConfirmComponent } from './components/forgot-password-confirm/forgot-password-confirm.component';
+import { CreateUserComponent } from './components/create-user/create-user.component';
 import { BookComponent } from './components/book/book.component';
 import { AuthGuard } from './auth/auth.guard'
 
@@ -21,6 +22,11 @@ const routes: Routes = [
     component: ForgotPasswordComponent
   },
   {
+    path: 'createUser',
+    component: CreateUserComponent,
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'forgotPasswordConfirm',
     component: ForgotPasswordConfirmComponent
   },
@@ -28,7 +34,7 @@ const routes: Routes = [
     path: '',
     component: BookComponent,
     canActivate: [AuthGuard]
-  }
+  },
 ];
 
 @NgModule({
