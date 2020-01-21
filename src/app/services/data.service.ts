@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service'
 import { HttpClient } from '@angular/common/http';
-import {SetDataCommand, GetDataCommand, GetDataCommandResponse, SetDataCommandResponse} from '../types'
-import {SetTextCommand, GetTextCommand, GetTextCommandResponse, SetTextCommandResponse, User, CreateUserCommand, CreateUserCommandResponse} from '../types'
+import { SetDataCommand, GetDataCommand, GetDataCommandResponse, SetDataCommandResponse} from '../types'
+import { User, CreateUserCommand, CreateUserCommandResponse} from '../types'
 import { from, Observable } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
@@ -35,26 +35,6 @@ export class DataService {
     const proceed = flatMap((user: User) => {
       let command: SetDataCommand = { email : user.attributes.email, ctrl : ctrl, json: json};
       return this.http.post<SetDataCommandResponse>(`${this.apiUrl}/data/set`, command);
-    });
-    return proceed(user);
-  }
-
-  getText(ctrl): Observable<GetTextCommandResponse> {
-    let user = from(this.auth.getCurrentUser());
-
-    const proceed = flatMap((user: User) => {
-      let command: GetTextCommand = { email : user.attributes.email, ctrl : ctrl};
-      return this.http.post<GetTextCommandResponse>(`${this.apiUrl}/gettext`, command);
-    });
-    return proceed(user);
-  }
-
-  setText(ctrl, text): Observable<SetTextCommandResponse> {
-    let user = from(this.auth.getCurrentUser());
-
-    const proceed = flatMap((user: User) => {
-      let command: SetTextCommand = { email : user.attributes.email, ctrl : ctrl, text: text};
-      return this.http.post<SetTextCommandResponse>(`${this.apiUrl}/settext`, command);
     });
     return proceed(user);
   }

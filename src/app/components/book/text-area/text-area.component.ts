@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from '../../../services/data.service'
-import { GetTextCommandResponse } from '../../../types'
 
 @Component({
   selector: 'app-text-area',
@@ -19,9 +18,9 @@ export class TextAreaComponent implements OnInit {
 
   ngOnInit() {
     this.progress = true;
-    this.data.getText(this.ctrl)
+    this.data.getData(this.ctrl)
     .subscribe(
-      data => { this.text = data.text; this.error = false; },
+      data => { this.text = data.json === undefined ? "": data.json.text; this.error = false; },
       err => { this.error = true; }
     )
     .add(() => {
@@ -29,9 +28,9 @@ export class TextAreaComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  onSave() {
     this.progress = true;
-    this.data.setText(this.ctrl, this.text)
+    this.data.setData(this.ctrl, { text: this.text})
     .subscribe(
       data => { this.error = false; },
       err => { this.error = true; }

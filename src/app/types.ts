@@ -29,27 +29,6 @@ export interface GetDataCommandResponse {
   json: any;
 }
 
-export interface SetTextCommand {
-  email: string;
-  ctrl: string;
-  text: string;
-}
-
-export interface SetTextCommandResponse {
-  success: boolean;
-}
-
-export interface GetTextCommand {
-  email: string;
-  ctrl: string;
-}
-
-export interface GetTextCommandResponse {
-  email: string;
-  ctrl: string;
-  text: string;
-}
-
 export interface Attributes {
   email: string;
 }
