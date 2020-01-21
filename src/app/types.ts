@@ -8,6 +8,27 @@ export enum ErrorType {
   Generic = 6,
 }
 
+export interface SetDataCommand {
+  email: string;
+  ctrl: string;
+  json: any;
+}
+
+export interface SetDataCommandResponse {
+  success: boolean;
+}
+
+export interface GetDataCommand {
+  email: string;
+  ctrl: string;
+}
+
+export interface GetDataCommandResponse {
+  email: string;
+  ctrl: string;
+  json: any;
+}
+
 export interface SetTextCommand {
   email: string;
   ctrl: string;
