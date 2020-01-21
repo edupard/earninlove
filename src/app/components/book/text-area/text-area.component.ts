@@ -12,7 +12,7 @@ export class TextAreaComponent implements OnInit {
 
   public text;
   public error = false;
-  public progress = true;
+  public progress = false;
 
   constructor(private data: DataService) { }
 

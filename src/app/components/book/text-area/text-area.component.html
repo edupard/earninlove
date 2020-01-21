@@ -1,6 +1,7 @@
-<div>
-  <div>
-    <textarea style="width: 100%; min-height:10rem" [(ngModel)]="text"></textarea>
+<div class="component">
+  <div class="input-group textarea">
+    <textarea class="form-control" style="width: 100%; min-height:10rem" aria-label="With textarea"
+              [(ngModel)]="text"></textarea>
   </div>
   <div>
     <button [attr.disabled]="progress ? true : null" class="btn btn-primary" (click)="onSave()">

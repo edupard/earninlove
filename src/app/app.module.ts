@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,7 @@ import { TextAreaComponent } from './components/book/text-area/text-area.compone
 import { TokenInterceptor } from './auth/token.interceptor';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { ListComponent } from './components/book/list/list.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ForgotPasswordConfirmComponent,
     TextAreaComponent,
     CreateUserComponent,
+    ListComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +36,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    DragDropModule,
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},
