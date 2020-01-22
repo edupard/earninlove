@@ -4,11 +4,16 @@
     <li class="container list-group-item" *ngFor="let item of items; let i = index" cdkDrag>
       <div class="row">
         <div class="col-2">
-          <button [hidden]="!dragAndDrop" class="btn btn-primary py-1 px-2" cdkDragHandle><i class="fas fa-arrows-alt"></i></button>
+          <button [hidden]="!dragAndDrop" class="btn btn-primary py-1 px-2" cdkDragHandle><i
+            class="fas fa-arrows-alt"></i></button>
         </div>
         <div class="col-8 text-center">
           <app-emoji *ngIf="emoji" [(emoji)]="item.emoji"></app-emoji>
-          <ngb-rating *ngIf="rating" [(rate)]="item.rating" [readonly]="readonly"></ngb-rating>
+          <ngb-rating *ngIf="rating" [(rate)]="item.rating">
+            <ng-template let-fill="fill" let-index="index">
+              <span class="star" [class.filled]="fill === 100">&#9733;</span>
+            </ng-template>
+          </ngb-rating>
           <p>{{item.text}}</p>
         </div>
         <div class="col-2">
@@ -24,7 +29,7 @@
     <input type="text" class="form-control" placeholder="{{placeholder}}" [(ngModel)]="itemText">
   </div>
   <div>
-    <button *ngIf="hasChanges()" [attr.disabled]="progress ? true : null" class="btn btn-primary" (click)="onSave()">
+    <button [attr.disabled]="progress ? true : null" class="btn btn-primary" (click)="onSave()">
       <i *ngIf="progress" class="fas fa-spinner fa-spin"></i>
       <i *ngIf="!progress" class="fas fa-check"></i>
       <span></span>

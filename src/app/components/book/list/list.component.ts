@@ -29,21 +29,11 @@ export class ListComponent implements OnInit {
 
   constructor(private data: DataService) { }
 
-  public saveOriginalItems()
-  {
-    this.originalItems = this.items;
-  }
-
-  public hasChanges()
-  {
-    return this.originalItems !== this.items;
-  }
-
   ngOnInit() {
     this.progress = true;
     this.data.getData(this.ctrl)
     .subscribe(
-      data => { this.items = data.json === undefined ? []: data.json.items; this.error = false; this.saveOriginalItems(); },
+      data => { this.items = data.json === undefined ? []: data.json.items; this.error = false; },
       err => { this.error = true; }
     )
     .add(() => {
@@ -59,7 +49,7 @@ export class ListComponent implements OnInit {
     this.progress = true;
     this.data.setData(this.ctrl, { items: this.items})
     .subscribe(
-      data => { this.error = false; this.saveOriginalItems(); },
+      data => { this.error = false; },
       err => { this.error = true; }
     )
     .add(() => {

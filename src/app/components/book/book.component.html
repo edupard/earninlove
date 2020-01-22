@@ -2,10 +2,6 @@
   <div class="row cover">
     <img src="assets/img/book-cover.jpg">
   </div>
-  <app-list [ctrl]="'1.2'" [header]="'Жизненные приоритеты'" [placeholder]="'приоритет'" [dragAndDrop]="true"></app-list>
-  <app-list [ctrl]="'1.3'" [header]="'Рабочие дела'" [placeholder]="'дело'"  [emoji]="true" [dragAndDrop]="true"></app-list>
-  <app-list [ctrl]="'1.4'" [header]="'Сферы жизни'" [placeholder]="'сфера'" [rating]="true"></app-list>
-  <app-text-area [ctrl]="'1.1'"></app-text-area>
   <div class="row justify-content-center">
     <div class="toc col-11 col-sm-11 col-md-8 col-lg-8">
       <h5 class="centered">
@@ -85,6 +81,13 @@
       <h5 id="toc_intro_1" class="section">
         Слово редактора
       </h5>
+      <app-list [ctrl]="'1.2'" [header]="'Жизненные приоритеты'" [placeholder]="'приоритет'"
+                [dragAndDrop]="true"></app-list>
+      <app-list [ctrl]="'1.3'" [header]="'Рабочие дела'" [placeholder]="'дело'" [emoji]="true"
+                [dragAndDrop]="true"></app-list>
+      <app-list [ctrl]="'1.4'" [header]="'Сферы жизни'" [placeholder]="'сфера'" [rating]="true"></app-list>
+      <app-text-area [ctrl]="'1.1'"></app-text-area>
+
       <p>
         Я – большой поклонник литературы “селф хелп”, поэтому для меня было особым удовольствием работать над книгой и
         иметь доступ к самым последним разработкам по поиску своего призвания. И хотя мне казалось, что давно нашла себя
@@ -386,7 +389,7 @@
     </div>
   </div>
 </div>
-<button class="btn btn-primary" class="logout" (click)="onLogout()"><i class="fa fa-sign-out"></i></button>
+<button class="btn btn-primary" class="logout" (click)="onLogout()"><span class="fas fa-sign-out-alt"></span></button>
 
 
 
