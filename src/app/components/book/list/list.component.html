@@ -3,7 +3,7 @@
   <ul cdkDropList class="list-group" (cdkDropListDropped)="drop($event)">
     <li class="container list-group-item" *ngFor="let item of items; let i = index" cdkDrag>
       <div class="row">
-        <div class="col-2">
+        <div class="col-2 text-center">
           <button [hidden]="!dragAndDrop" class="btn btn-primary py-1 px-2" cdkDragHandle><i
             class="fas fa-arrows-alt"></i></button>
         </div>
@@ -16,7 +16,7 @@
           </ngb-rating>
           <p>{{item.text}}</p>
         </div>
-        <div class="col-2">
+        <div class="col-2 text-center">
           <button class="btn btn-danger py-1 px-2" (click)="onRemoveAt(i)"><i class="fas fa-trash"></i></button>
         </div>
       </div>
