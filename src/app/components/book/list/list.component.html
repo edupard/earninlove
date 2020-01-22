@@ -24,11 +24,11 @@
     <input type="text" class="form-control" placeholder="{{placeholder}}" [(ngModel)]="itemText">
   </div>
   <div>
-    <button [attr.disabled]="progress ? true : null" class="btn btn-primary" (click)="onSave()">
+    <button *ngIf="hasChanges()" [attr.disabled]="progress ? true : null" class="btn btn-primary" (click)="onSave()">
       <i *ngIf="progress" class="fas fa-spinner fa-spin"></i>
       <i *ngIf="!progress" class="fas fa-check"></i>
       <span></span>
-      Сохранить список
+      Сохранить изменения
     </button>
     <p *ngIf="error" class="text-danger">Произошла ошибка, попробуйте повторить попытку позже</p>
   </div>
