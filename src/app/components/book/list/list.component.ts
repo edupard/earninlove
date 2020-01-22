@@ -18,6 +18,7 @@ export class ListComponent implements OnInit {
 
   @Input('emoji') emoji: boolean = false;
   @Input('rating') rating: boolean = false;
+  @Input('dragAndDrop') dragAndDrop: boolean = false;
 
 
   items = [];

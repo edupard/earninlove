@@ -1,10 +1,10 @@
 <div class="component">
-  <p class="list-header">{{header}}</p>
+  <p>{{header}}</p>
   <ul cdkDropList class="list-group" (cdkDropListDropped)="drop($event)">
-    <li class="list-group-item" *ngFor="let item of items; let i = index" cdkDrag>
+    <li class="container list-group-item" *ngFor="let item of items; let i = index" cdkDrag>
       <div class="row">
         <div class="col-2">
-          <button class="btn btn-primary" cdkDragHandle><i class="fas fa-arrows-alt"></i></button>
+          <button [hidden]="!dragAndDrop" class="btn btn-primary py-1 px-2" cdkDragHandle><i class="fas fa-arrows-alt"></i></button>
         </div>
         <div class="col-8 text-center">
           <app-emoji *ngIf="emoji" [(emoji)]="item.emoji"></app-emoji>
@@ -12,7 +12,7 @@
           <p>{{item.text}}</p>
         </div>
         <div class="col-2">
-          <button class="btn btn-danger" (click)="onRemoveAt(i)"><i class="fas fa-trash"></i></button>
+          <button class="btn btn-danger py-1 px-2" (click)="onRemoveAt(i)"><i class="fas fa-trash"></i></button>
         </div>
       </div>
     </li>
