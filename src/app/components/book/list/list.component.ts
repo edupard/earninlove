@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { DataService } from '../../../services/data.service'
+import { Emoji } from "../../../types"
 
 @Component({
   selector: 'app-list',
@@ -15,11 +16,14 @@ export class ListComponent implements OnInit {
 
   @Input('header')  header: string;
 
+  @Input('emoji') emoji: boolean = false;
+  @Input('rating') rating: boolean = false;
+
 
   items = [];
   public error = false;
   public progress = false;
-  public toAdd:string = '';
+  public itemText:string = '';
 
   constructor(private data: DataService) { }
 
@@ -35,7 +39,7 @@ export class ListComponent implements OnInit {
     });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<any>) {
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
   }
 
@@ -53,8 +57,18 @@ export class ListComponent implements OnInit {
 
   onAdd()
   {
-    if (this.toAdd !== '') {
-      this.items = [...this.items, this.toAdd];
+    if (this.itemText !== '') {
+      let item: any = { text: this.itemText };
+      if (this.emoji)
+      {
+        item = { ...item, emoji: Emoji.Neutral};
+      }
+      if (this.rating)
+      {
+        item = { ...item, rating: 5};
+      }
+      this.items = [...this.items, item];
+      this.itemText = '';
     }
   }
 

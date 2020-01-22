@@ -17,6 +17,9 @@ import { TokenInterceptor } from './auth/token.interceptor';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { ListComponent } from './components/book/list/list.component';
+import { EmojiComponent } from './components/book/emoji/emoji.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +32,7 @@ import { ListComponent } from './components/book/list/list.component';
     TextAreaComponent,
     CreateUserComponent,
     ListComponent,
+    EmojiComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,7 @@ import { ListComponent } from './components/book/list/list.component';
     FormsModule,
     ReactiveFormsModule,
     DragDropModule,
+    NgbModule,
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy},

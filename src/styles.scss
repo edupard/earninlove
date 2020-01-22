@@ -9,5 +9,7 @@ html {
 }
 
 @import "node_modules/bootstrap/scss/bootstrap.scss";
-$fa-font-path: "node_modules/font-awesome/fonts";
-@import "node_modules/font-awesome/scss/font-awesome.scss";
+$fa-font-path: "node_modules/@fortawesome/fontawesome-free/webfonts";
+@import "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";
+@import "node_modules/@fortawesome/fontawesome-free/scss/solid.scss";
+@import "node_modules/@fortawesome/fontawesome-free/scss/regular.scss";

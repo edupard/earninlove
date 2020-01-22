@@ -45,3 +45,9 @@ export interface CreateUserCommand {
 export interface CreateUserCommandResponse {
   success: boolean;
 }
+
+export enum Emoji {
+  Frown = 0,
+  Neutral = 1,
+  Smile = 2,
+};

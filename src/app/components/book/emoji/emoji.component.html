@@ -1,0 +1,3 @@
+<i *ngIf="emoji === Emoji.Frown" class="text-warning fas fa-frown" (click)="onNewEmoji(Emoji.Neutral)"></i>
+<i *ngIf="emoji === Emoji.Neutral" class="text-warning fas fa-meh" (click)="onNewEmoji(Emoji.Smile)"></i>
+<i *ngIf="emoji === Emoji.Smile" class="text-warning fas fa-smile" (click)="onNewEmoji(Emoji.Frown)"></i>

@@ -2,21 +2,31 @@
   <p class="list-header">{{header}}</p>
   <ul cdkDropList class="list-group" (cdkDropListDropped)="drop($event)">
     <li class="list-group-item" *ngFor="let item of items; let i = index" cdkDrag>
-      <button class="btn-sm btn-light" cdkDragHandle><i class="fa fa-arrows-v"></i></button>
-      <span style="margin-left: 1rem;">{{item}}</span>
-      <button class="btn-sm btn-danger" style="float:right" (click)="onRemoveAt(i)"><i class="fa fa-trash"></i></button>
+      <div class="row">
+        <div class="col-2">
+          <button class="btn btn-primary" cdkDragHandle><i class="fas fa-arrows-alt"></i></button>
+        </div>
+        <div class="col-8 text-center">
+          <app-emoji *ngIf="emoji" [(emoji)]="item.emoji"></app-emoji>
+          <ngb-rating *ngIf="rating" [(rate)]="item.rating" [readonly]="readonly"></ngb-rating>
+          <p>{{item.text}}</p>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-danger" (click)="onRemoveAt(i)"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
     </li>
   </ul>
   <div class="input-group add-area">
     <div class="input-group-prepend">
-      <button class="btn btn-outline-primary" type="button" (click)="onAdd()">Добавить</button>
+      <button class="btn btn-primary" type="button" (click)="onAdd()">Добавить</button>
     </div>
-    <input type="text" class="form-control" placeholder="{{placeholder}}" [(ngModel)]="toAdd">
+    <input type="text" class="form-control" placeholder="{{placeholder}}" [(ngModel)]="itemText">
   </div>
   <div>
     <button [attr.disabled]="progress ? true : null" class="btn btn-primary" (click)="onSave()">
-      <i *ngIf="progress" class="fa fa-spinner fa-spin"></i>
-      <i *ngIf="!progress" class="fa fa-check"></i>
+      <i *ngIf="progress" class="fas fa-spinner fa-spin"></i>
+      <i *ngIf="!progress" class="fas fa-check"></i>
       <span></span>
       Сохранить список
     </button>
