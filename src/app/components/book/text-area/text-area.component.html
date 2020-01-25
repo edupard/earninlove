@@ -1,15 +1,21 @@
 <div class="component">
   <div class="input-group textarea">
     <textarea class="form-control" style="width: 100%; min-height:10rem" aria-label="With textarea"
-              [(ngModel)]="text"></textarea>
+              [ngModel]="text" (ngModelChange)="setText($event)"></textarea>
   </div>
   <div>
-    <button *ngIf="hasChanges()" [attr.disabled]="progress ? true : null" class="btn btn-primary" (click)="onSave()">
-      <i *ngIf="progress" class="fa fa-spinner fa-spin"></i>
-      <i *ngIf="!progress" class="fa fa-check"></i>
-      <span></span>
-      Сохранить
-    </button>
-    <p *ngIf="error" class="text-danger">Произошла ошибка, попробуйте повторить попытку позже</p>
+    <p *ngIf="!progress && !error && !loadError && !hasChanges" class="text-success text-center">изменения сохранены
+    </p>
+    <p *ngIf="!progress && !error && !loadError && hasChanges" class="text-primary text-center">изменения будут
+      сохранены автоматически
+    </p>
+    <p *ngIf="progress" class="text-primary text-center"><i class="fas fa-spinner fa-spin text-icon"></i>сохраняем
+      изменения</p>
+    <p *ngIf="error" class="text-danger text-center"><i class="fas fa-exclamation-circle text-icon"></i>произошла ошибка
+      при сохранении данных
+    </p>
+    <p *ngIf="loadError" class="text-danger text-center"><i class="fas fa-exclamation-circle text-icon"></i>произошла
+      ошибка при загрузке
+      данных, пожалуйста обновите страницу</p>
   </div>
 </div>

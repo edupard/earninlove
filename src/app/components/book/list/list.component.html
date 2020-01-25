@@ -1,5 +1,5 @@
 <div class="component">
-  <p>{{header}}</p>
+  <p *ngIf="header !== ''">{{header}}</p>
   <ul cdkDropList class="list-group" (cdkDropListDropped)="drop($event)">
     <li class="container list-group-item" *ngFor="let item of items; let i = index" cdkDrag>
       <div class="row">
@@ -29,13 +29,15 @@
     <input type="text" class="form-control" placeholder="{{placeholder}}" [(ngModel)]="itemText">
   </div>
   <div>
-    <button [attr.disabled]="progress ? true : null" class="btn btn-primary" (click)="onSave()">
-      <i *ngIf="progress" class="fas fa-spinner fa-spin"></i>
-      <i *ngIf="!progress" class="fas fa-check"></i>
-      <span></span>
-      Сохранить изменения
-    </button>
-    <p *ngIf="error" class="text-danger">Произошла ошибка, попробуйте повторить попытку позже</p>
+    <p *ngIf="!progress && !error && !loadError && !hasChanges" class="text-success text-center">изменения сохранены
+    </p>
+    <p *ngIf="!progress && !error && !loadError && hasChanges" class="text-primary text-center">изменения будут сохранены автоматически
+    </p>
+    <p *ngIf="progress" class="text-primary text-center"><i class="fas fa-spinner fa-spin text-icon"></i>сохраняем изменения</p>
+    <p *ngIf="error" class="text-danger text-center"><i class="fas fa-exclamation-circle text-icon"></i>произошла ошибка при сохранении данных
+    </p>
+    <p *ngIf="loadError" class="text-danger text-center"><i class="fas fa-exclamation-circle text-icon"></i>произошла ошибка при загрузке
+      данных, пожалуйста обновите страницу</p>
   </div>
 </div>
 
