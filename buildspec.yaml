@@ -2,7 +2,7 @@ version: 0.2
 
 env:
     variables:
-        S3_BUCKET: "site.earninlove.com"
+        S3_BUCKET: "book.earninlove.com"
 APP_NAME: "earninlove"
 BUILD_ENV : "prod"
 
