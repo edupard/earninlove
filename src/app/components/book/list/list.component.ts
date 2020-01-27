@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { DataService } from '../../../services/data.service'
 import { Emoji } from "../../../types"
+import {Observable} from 'rxjs/Rx';
+import { timer } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -14,7 +16,7 @@ export class ListComponent implements OnInit {
 
   @Input('placeholder')  placeholder: string;
 
-  @Input('header')  header: string;
+  @Input('header')  header: string = '';
 
   @Input('emoji') emoji: boolean = false;
   @Input('rating') rating: boolean = false;
@@ -22,10 +24,12 @@ export class ListComponent implements OnInit {
 
 
   items = [];
-  originalItems = [];
   public error = false;
+  public loadError = false;
   public progress = false;
   public itemText:string = '';
+  public saveSubscription: any;
+  public hasChanges = false;
 
   constructor(private data: DataService) { }
 
@@ -33,28 +37,36 @@ export class ListComponent implements OnInit {
     this.progress = true;
     this.data.getData(this.ctrl)
     .subscribe(
-      data => { this.items = data.json === undefined ? []: data.json.items; this.error = false; },
-      err => { this.error = true; }
+      data => { this.items = data.json === undefined ? []: data.json.items; },
+      err => { this.loadError = true; }
     )
     .add(() => {
       this.progress = false;
+    });
+  }
+
+  scheduleSave()
+  {
+    if (this.saveSubscription !== undefined) { this.saveSubscription.unsubscribe(); }
+    this.hasChanges = true;
+    this.saveSubscription = timer(5000).subscribe(t=>{
+      this.hasChanges = false;
+      this.progress = true;
+      this.error = false;
+      this.data.setData(this.ctrl, { items: this.items})
+      .subscribe(
+        data => { this.error = false; },
+        err => { this.error = true; }
+      )
+      .add(() => {
+        this.progress = false;
+      });
     });
   }
 
   drop(event: CdkDragDrop<any>) {
     moveItemInArray(this.items, event.previousIndex, event.currentIndex);
-  }
-
-  onSave() {
-    this.progress = true;
-    this.data.setData(this.ctrl, { items: this.items})
-    .subscribe(
-      data => { this.error = false; },
-      err => { this.error = true; }
-    )
-    .add(() => {
-      this.progress = false;
-    });
+    this.scheduleSave();
   }
 
   onAdd()
@@ -71,12 +83,14 @@ export class ListComponent implements OnInit {
       }
       this.items = [...this.items, item];
       this.itemText = '';
+      this.scheduleSave();
     }
   }
 
   onRemoveAt(idx)
   {
     this.items =  [...this.items.slice(0, idx), ...this.items.slice(idx + 1)];
+    this.scheduleSave();
   }
 
 }

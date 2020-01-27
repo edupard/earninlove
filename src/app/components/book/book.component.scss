@@ -5,6 +5,7 @@
 p { text-indent: 2rem }
 
 .text-col {
+  @extend .col-11;
   @extend .col-md-8;
 }
 
@@ -34,12 +35,12 @@ p { text-indent: 2rem }
 }
 
 .chapter {
-  margin-top: 3rem;
+  margin-top: 12rem;
   text-align: center;
 }
 
 .section {
-  margin-top: 1rem;
+  margin-top: 6rem;
   text-align: center;
 }
 
