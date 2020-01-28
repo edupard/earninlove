@@ -13,6 +13,8 @@ export class TextAreaComponent implements OnInit {
 
   @Input('ctrl') ctrl: string;
 
+  @Input('minHeight') minHeight = 10;
+
   public text = '';
   public ControlState = ControlState;
   public state: ControlState = ControlState.Initializing;

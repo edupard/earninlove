@@ -1,7 +1,7 @@
 <div class="component">
   <div class="input-group textarea">
-    <textarea class="form-control" style="width: 100%; min-height:10rem" aria-label="With textarea"
-              [ngModel]="text" (ngModelChange)="setText($event)"></textarea>
+    <textarea class="form-control" style="width: 100%" aria-label="With textarea"
+              [ngModel]="text" (ngModelChange)="setText($event)" [ngStyle]="{'min-height.rem': minHeight}"></textarea>
   </div>
   <div>
     <p *ngIf="state===ControlState.Loading" class="text-primary text-center">
