@@ -51,3 +51,13 @@ export enum Emoji {
   Neutral = 1,
   Smile = 2,
 };
+
+export enum ControlState {
+  Initializing = 0,
+  Loading = 1,
+  LoadingError = 2,
+  HasChanges = 3,
+  Saving = 4,
+  Error = 5,
+  UpToDate = 6,
+};

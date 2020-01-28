@@ -1,6 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core'
 import { DataService } from '../../../services/data.service'
-import {Observable} from 'rxjs/Rx';
+import {Observable} from 'rxjs/Rx'
+import { ControlState } from "../../../types"
+import { timer } from 'rxjs'
 
 @Component({
   selector: 'app-text-area',
@@ -12,46 +14,40 @@ export class TextAreaComponent implements OnInit {
   @Input('ctrl') ctrl: string;
 
   public text = '';
-  public error = false;
-  public loadError = false;
-  public progress = false;
-  public hasChanges = false;
+  public ControlState = ControlState;
+  public state: ControlState = ControlState.Initializing;
+  public saveSubscription: any;
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.progress = true;
+    this.state = ControlState.Loading;
     this.data.getData(this.ctrl)
     .subscribe(
-      data => { this.text = data.json === undefined ? "": data.json.text; this.error = false; },
-      err => { this.loadError = true; }
-    )
-    .add(() => {
-      this.progress = false;
-    });
+      data => { this.text = data.json === undefined ? "": data.json.text;
+                this.state = ControlState.UpToDate;
+              },
+      err => { this.state = ControlState.LoadingError; }
+    );
+  }
 
-    let timer = Observable.timer(10000,10000);
-    timer.subscribe(t=>{
-      if (!this.loadError && (this.hasChanges  || this.error))
-      {
-        this.hasChanges = false;
-        this.progress = true;
-        this.error = false;
-        this.data.setData(this.ctrl, { text: this.text})
-        .subscribe(
-          data => { this.error = false; },
-          err => { this.error = true; }
-        )
-        .add(() => {
-          this.progress = false;
-        });
-      }
+  scheduleSave()
+  {
+    this.state = ControlState.HasChanges;
+    if (this.saveSubscription !== undefined) { this.saveSubscription.unsubscribe(); }
+    this.saveSubscription = timer(5000).subscribe(t=>{
+      this.state = ControlState.Saving;
+      this.data.setData(this.ctrl, { text: this.text})
+      .subscribe(
+        data => { this.state = ControlState.UpToDate; },
+        err => { this.state = ControlState.Error; }
+      );
     });
   }
 
   public setText(data)
   {
     this.text = data;
-    this.hasChanges = true;
+    this.scheduleSave();
   }
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { Component, OnInit, Input } from '@angular/core'
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop'
 import { DataService } from '../../../services/data.service'
-import { Emoji } from "../../../types"
-import {Observable} from 'rxjs/Rx';
-import { timer } from 'rxjs';
+import { Emoji, ControlState } from "../../../types"
+import {Observable} from 'rxjs/Rx'
+import { timer } from 'rxjs'
 
 @Component({
   selector: 'app-list',
@@ -24,43 +24,35 @@ export class ListComponent implements OnInit {
 
 
   items = [];
-  public error = false;
-  public loadError = false;
-  public progress = false;
+  public ControlState = ControlState;
+  public state: ControlState = ControlState.Initializing;
   public itemText:string = '';
   public saveSubscription: any;
-  public hasChanges = false;
 
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    this.progress = true;
+    this.state = ControlState.Loading;
     this.data.getData(this.ctrl)
     .subscribe(
-      data => { this.items = data.json === undefined ? []: data.json.items; },
-      err => { this.loadError = true; }
-    )
-    .add(() => {
-      this.progress = false;
-    });
+      data => { this.items = data.json === undefined ? []: data.json.items;
+                this.state = ControlState.UpToDate;
+              },
+      err => { this.state = ControlState.LoadingError; }
+    );
   }
 
   scheduleSave()
   {
+    this.state = ControlState.HasChanges;
     if (this.saveSubscription !== undefined) { this.saveSubscription.unsubscribe(); }
-    this.hasChanges = true;
     this.saveSubscription = timer(5000).subscribe(t=>{
-      this.hasChanges = false;
-      this.progress = true;
-      this.error = false;
+      this.state = ControlState.Saving;
       this.data.setData(this.ctrl, { items: this.items})
       .subscribe(
-        data => { this.error = false; },
-        err => { this.error = true; }
-      )
-      .add(() => {
-        this.progress = false;
-      });
+        data => { this.state = ControlState.UpToDate; },
+        err => { this.state = ControlState.Error; }
+      );
     });
   }
 

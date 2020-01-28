@@ -4,18 +4,22 @@
               [ngModel]="text" (ngModelChange)="setText($event)"></textarea>
   </div>
   <div>
-    <p *ngIf="!progress && !error && !loadError && !hasChanges" class="text-success text-center">изменения сохранены
+    <p *ngIf="state===ControlState.Loading" class="text-primary text-center">
+      <i class="fas fa-spinner fa-spin text-icon"></i>загружаем данные
     </p>
-    <p *ngIf="!progress && !error && !loadError && hasChanges" class="text-primary text-center">изменения будут
-      сохранены автоматически
+    <p *ngIf="state===ControlState.LoadingError" class="text-danger text-center">
+      <i class="fas fa-exclamation-circle text-icon"></i>произошла ошибка при загрузке данных, пожалуйста обновите
+      страницу
     </p>
-    <p *ngIf="progress" class="text-primary text-center"><i class="fas fa-spinner fa-spin text-icon"></i>сохраняем
-      изменения</p>
-    <p *ngIf="error" class="text-danger text-center"><i class="fas fa-exclamation-circle text-icon"></i>произошла ошибка
-      при сохранении данных
+    <p *ngIf="state===ControlState.UpToDate" class="text-success text-center">
+      все изменения сохранены
     </p>
-    <p *ngIf="loadError" class="text-danger text-center"><i class="fas fa-exclamation-circle text-icon"></i>произошла
-      ошибка при загрузке
-      данных, пожалуйста обновите страницу</p>
+    <p *ngIf="state===ControlState.HasChanges" class="text-primary text-center">изменения будут сохранены автоматически
+    </p>
+    <p *ngIf="state===ControlState.Saving" class="text-primary text-center">
+      <i class="fas fa-spinner fa-spin text-icon"></i>сохраняем изменения</p>
+    <p *ngIf="state===ControlState.Error" class="text-danger text-center"><i
+      class="fas fa-exclamation-circle text-icon"></i>произошла ошибка при сохранении данных
+    </p>
   </div>
 </div>
