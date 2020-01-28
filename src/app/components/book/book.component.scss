@@ -56,12 +56,12 @@ p { text-indent: 2rem }
 }
 
 .chapter {
-  margin-top: 12rem;
+  margin-top: 6rem;
   text-align: center;
 }
 
 .section {
-  margin-top: 6rem;
+  margin-top: 4rem;
   text-align: center;
 }
 
@@ -121,6 +121,15 @@ p { text-indent: 2rem }
   border-top: 1px solid rgba(255,255,255,0.2);
 }
 
+// .sm-link {
+//   padding: 20px;
+//   font-size: 30px;
+//   width: 50px;
+//   text-align: center;
+//   text-decoration: none;
+//   margin: 5px 2px;
+// }
+
 .fa-facebook {
   background: #3B5998;
   color: white;
@@ -137,6 +146,11 @@ p { text-indent: 2rem }
 }
 
 .fa-linkedin {
+  background: #007bb5;
+  color: white;
+}
+
+.fa-slideshare {
   background: #007bb5;
   color: white;
 }
@@ -224,5 +238,15 @@ p { text-indent: 2rem }
 
 .fa-rss {
   background: #ff6600;
+  color: white;
+}
+
+.fa-blog {
+  background: #ff6600;
+  color: white;
+}
+
+.fa-envelope {
+  background: #00aff0;
   color: white;
 }

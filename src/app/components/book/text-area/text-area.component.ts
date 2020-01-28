@@ -26,7 +26,7 @@ export class TextAreaComponent implements OnInit {
     this.state = ControlState.Loading;
     this.data.getData(this.ctrl)
     .subscribe(
-      data => { this.text = data.json === undefined ? "": data.json.text;
+      data => { this.text = data.json === undefined || data.json.text === undefined ? "": data.json.text;
                 this.state = ControlState.UpToDate;
               },
       err => { this.state = ControlState.LoadingError; }

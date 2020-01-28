@@ -9,7 +9,7 @@
         </div>
         <div class="col-8 text-center">
           <app-emoji *ngIf="emoji" [(emoji)]="item.emoji"></app-emoji>
-          <ngb-rating *ngIf="rating" [(rate)]="item.rating">
+          <ngb-rating *ngIf="rating" [(rate)]="item.rating" [max]="5">
             <ng-template let-fill="fill" let-index="index">
               <span class="star" [class.filled]="fill === 100">&#9733;</span>
             </ng-template>
