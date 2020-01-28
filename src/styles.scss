@@ -8,6 +8,9 @@ html {
   scroll-behavior: smooth;
 }
 
+$theme-colors: (
+  primary: #92DCCF
+);
 @import "node_modules/bootstrap/scss/bootstrap.scss";
 $fa-font-path: "node_modules/@fortawesome/fontawesome-free/webfonts";
 @import "node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss";

@@ -20,12 +20,12 @@
           <p *ngIf="error === ErrorType.UserNotFound" class="text-danger">Данная почта не зарегистрирована</p>
           <p *ngIf="error === ErrorType.NotAuthorized" class="text-danger">Введена неверная почта или пароль</p>
           <p *ngIf="error === ErrorType.EmailNotConfirmed" class="text-danger">Почта не подтверждена, пожалуйста
-            обратитесь в службу поддержки: admin@earninlove.com</p>
+            обратитесь в службу поддержки: hi@earninlove.com</p>
           <p *ngIf="error === ErrorType.PasswordResetRequired" class="text-danger">Необходимо установить новый пароль,
-            пожалуйста обратитесь в службу поддержки: admin@earninlove.com
+            пожалуйста обратитесь в службу поддержки: hi@earninlove.com
           </p>
           <p *ngIf="error === ErrorType.Generic" class="text-danger">Произошла ошибка, пожалуйста повторите попытку
-            позже или обратитесь в службу поддержки: admin@earninlove.com
+            позже или обратитесь в службу поддержки: hi@earninlove.com
           </p>
           <p>
             <a [routerLink]="['/forgotPassword']">Забыли пароль?</a>
