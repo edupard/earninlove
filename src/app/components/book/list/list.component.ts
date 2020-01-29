@@ -36,9 +36,12 @@ export class ListComponent implements OnInit {
     this.state = ControlState.Loading;
     this.data.getData(this.ctrl)
     .subscribe(
-      data => { this.items = data.json === undefined || data.json.items === undefined ? []: data.json.items;
+      data => { this.items = data === undefined ? []: data.json.items;
                 this.state = ControlState.UpToDate;
               },
+//       data => { this.items = data.json === undefined || data.json.items === undefined ? []: data.json.items;
+//                 this.state = ControlState.UpToDate;
+//               },
       err => { this.state = ControlState.LoadingError; }
     );
   }

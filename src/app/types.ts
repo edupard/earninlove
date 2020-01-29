@@ -18,6 +18,20 @@ export interface SetDataCommandResponse {
   success: boolean;
 }
 
+export interface ControlData {
+  ctrl: string;
+  json: any;
+}
+
+export interface UserData {
+  email: string;
+  items: ControlData[];
+}
+
+export interface GetUserDataCommand {
+  email: string;
+}
+
 export interface GetDataCommand {
   email: string;
   ctrl: string;
