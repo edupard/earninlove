@@ -1,5 +1,6 @@
 <div class="component">
-  <p *ngIf="header !== ''">{{header}}</p>
+  <h2 class="text-center text-primary" *ngIf="superHeader !== ''">{{superHeader}}</h2>
+  <p class="text-center" *ngIf="header !== ''">{{header}}</p>
   <ul cdkDropList class="list-group" (cdkDropListDropped)="drop($event)">
     <li class="container list-group-item" *ngFor="let item of items; let i = index" cdkDrag>
       <div class="row">
@@ -14,7 +15,7 @@
               <span class="star" [class.filled]="fill === 100">&#9733;</span>
             </ng-template>
           </ngb-rating>
-          <p>{{item.text}}</p>
+          <p contenteditable="true" [ngModel]="item.text" (ngModelChange)="itemModelChanged(item, $event)"></p>
         </div>
         <div class="col-2 text-center">
           <button class="btn btn-danger py-1 px-2" (click)="onRemoveAt(i)"><i class="fas fa-trash"></i></button>
@@ -26,7 +27,7 @@
     <div class="input-group-prepend">
       <button class="btn btn-primary" type="button" (click)="onAdd()">Добавить</button>
     </div>
-    <input type="text" class="form-control" placeholder="{{placeholder}}" [(ngModel)]="itemText">
+    <input type="text" class="form-control" placeholder="{{placeholder}}" [(ngModel)]="text">
   </div>
   <div>
     <p *ngIf="state===ControlState.Loading" class="text-primary text-center">

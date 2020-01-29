@@ -16,6 +16,7 @@ export class ListComponent implements OnInit {
 
   @Input('placeholder')  placeholder: string;
 
+  @Input('superHeader')  superHeader: string = '';
   @Input('header')  header: string = '';
 
   @Input('emoji') emoji: boolean = false;
@@ -26,7 +27,7 @@ export class ListComponent implements OnInit {
   items = [];
   public ControlState = ControlState;
   public state: ControlState = ControlState.Initializing;
-  public itemText:string = '';
+  public text:string = '';
   public saveSubscription: any;
 
   constructor(private data: DataService) { }
@@ -63,8 +64,8 @@ export class ListComponent implements OnInit {
 
   onAdd()
   {
-    if (this.itemText !== '') {
-      let item: any = { text: this.itemText };
+    if (this.text !== '') {
+      let item: any = { text: this.text };
       if (this.emoji)
       {
         item = { ...item, emoji: Emoji.Neutral};
@@ -74,7 +75,7 @@ export class ListComponent implements OnInit {
         item = { ...item, rating: 3};
       }
       this.items = [...this.items, item];
-      this.itemText = '';
+      this.text = '';
       this.scheduleSave();
     }
   }
@@ -82,6 +83,11 @@ export class ListComponent implements OnInit {
   onRemoveAt(idx)
   {
     this.items =  [...this.items.slice(0, idx), ...this.items.slice(idx + 1)];
+    this.scheduleSave();
+  }
+
+  itemModelChanged(item, newText) {
+    item.text = newText;
     this.scheduleSave();
   }
 
