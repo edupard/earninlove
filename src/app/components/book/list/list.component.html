@@ -1,6 +1,6 @@
 <div class="component">
-  <h2 class="text-center text-primary" *ngIf="superHeader !== ''">{{superHeader}}</h2>
-  <p class="text-center" *ngIf="header !== ''">{{header}}</p>
+  <h2 class="text-center text-primary" *ngIf="superHeader && header !== ''">{{header}}</h2>
+  <p class="text-center" *ngIf="!superHeader && header !== ''">{{header}}</p>
   <ul cdkDropList class="list-group" (cdkDropListDropped)="drop($event)">
     <li class="container list-group-item" *ngFor="let item of items; let i = index" cdkDrag>
       <div class="row">
@@ -15,7 +15,7 @@
               <span class="star" [class.filled]="fill === 100">&#9733;</span>
             </ng-template>
           </ngb-rating>
-          <p contenteditable="true" [ngModel]="item.text" (ngModelChange)="itemModelChanged(item, $event)"></p>
+          <p contenteditable="true" [ngModel]="item.text" (ngModelChange)="itemModelChanged(item, $event)" [ngClass]="{'text-primary': superHeader}"></p>
         </div>
         <div class="col-2 text-center">
           <button class="btn btn-danger py-1 px-2" (click)="onRemoveAt(i)"><i class="fas fa-trash"></i></button>
@@ -36,8 +36,8 @@
     <p *ngIf="state===ControlState.LoadingError" class="text-danger text-center">
       <i class="fas fa-exclamation-circle text-icon"></i>произошла ошибка при загрузке данных, пожалуйста обновите страницу
     </p>
-    <p *ngIf="state===ControlState.UpToDate" class="text-success text-center">
-      все изменения сохранены
+    <p *ngIf="state===ControlState.UpToDate" class="text-primary text-center">
+      сохранено
     </p>
     <p *ngIf="state===ControlState.HasChanges" class="text-primary text-center">изменения будут сохранены автоматически
     </p>
