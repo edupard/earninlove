@@ -170,7 +170,10 @@
   </div>
   <div class="row justify-content-center">
     <div class="col text-col">
-      <app-list [ctrl]="'0.0'" [superHeader]="true" [header]="'Копилка профессий'" [placeholder]="'профессия'" [dragAndDrop]="true"></app-list>
+      <app-list [ctrl]="'0.0'" [superHeader]="true" [header]="'Копилка профессий'" [placeholder]="'профессия'"
+                [dragAndDrop]="true"></app-list>
+      <app-list [ctrl]="'0.0'" [superHeader]="true" [header]="'Копилка профессий'" [placeholder]="'профессия'"
+                [dragAndDrop]="true"></app-list>
       <h3 id="toc_intro" class="chapter">
         Введение
       </h3>
@@ -804,9 +807,9 @@
       <p>
         Вам необходимо будет еще раз ввести самые важные вам сферы жизни (они должны быть вверху) из этой таблички в
         список ниже:
-
-        <app-list [ctrl]="'1.2'" [header]="'Список жизненных ценностей:'" [placeholder]="'Ценность'"
-                  [dragAndDrop]="true"></app-list>
+      </p>
+      <app-list [ctrl]="'1.2'" [header]="'Список жизненных ценностей:'" [placeholder]="'Ценность'"
+                [dragAndDrop]="true" [rating]="true"></app-list>
       <p>
         Только теперь вы должны напротив каждого пункта выделить уровень того, на сколько вы удовлетворены им на данный
         момент по
@@ -2880,13 +2883,19 @@
       <div class="fa-4x">
         <span class="fa-layers">
           <a href="http://intherightplace.ru/" target="_blank"><i class="fas fa-blog fa-border"></i></a>
-          <a href="https://www.facebook.com/profile.php?id=100000566417471" target="_blank"><i class="fab fa-facebook fa-border"></i></a>
-          <a href="https://www.youtube.com/channel/UC9ddzxrHxnXV1FA9cnHMpLw" target="_blank"><i class="fab fa-youtube fa-border" ></i></a>
-          <a href="https://www.instagram.com/tarasovs_family/" target="_blank"><i class="fab fa-instagram fa-border" ></i></a>
-          <a href="https://www.linkedin.com/in/nadezhda-tarasova-intherightplace" target="_blank"><i class="fab fa-linkedin fa-border" ></i></a>
-          <a href="http://www.slideshare.net/ssuserd09c15" target="_blank"><i class="fab fa-slideshare fa-border"></i></a>
+          <a href="https://www.facebook.com/profile.php?id=100000566417471" target="_blank"><i
+            class="fab fa-facebook fa-border"></i></a>
+          <a href="https://www.youtube.com/channel/UC9ddzxrHxnXV1FA9cnHMpLw" target="_blank"><i
+            class="fab fa-youtube fa-border"></i></a>
+          <a href="https://www.instagram.com/tarasovs_family/" target="_blank"><i
+            class="fab fa-instagram fa-border"></i></a>
+          <a href="https://www.linkedin.com/in/nadezhda-tarasova-intherightplace" target="_blank"><i
+            class="fab fa-linkedin fa-border"></i></a>
+          <a href="http://www.slideshare.net/ssuserd09c15" target="_blank"><i
+            class="fab fa-slideshare fa-border"></i></a>
           <a href="mailto:nadejda.tarasova@gmail.com" target="_blank"><i class="fas fa-envelope fa-border"></i></a>
-          <a href="https://www.marketologi.ru/o-gildii/chleny/tarasova-nadezhda/" target="_blank"><i class="fas fa-rss fa-border"></i></a>
+          <a href="https://www.marketologi.ru/o-gildii/chleny/tarasova-nadezhda/" target="_blank"><i
+            class="fas fa-rss fa-border"></i></a>
         </span>
       </div>
       <h5 class="section">
@@ -2895,9 +2904,9 @@
       <div class="fa-4x">
         <span class="fa-layers">
           <a href="www.facebook.com/liudmilarehbinder" target="_blank"><i class="fab fa-facebook fa-border"></i></a>
-          <a href="www.linkedin.com/in/liudmilarehbinder" target="_blank"><i class="fab fa-linkedin fa-border" ></i></a>
+          <a href="www.linkedin.com/in/liudmilarehbinder" target="_blank"><i class="fab fa-linkedin fa-border"></i></a>
           <a href="mailto:liudmila.rehbinder@gmail.com" target="_blank"><i class="fas fa-envelope fa-border"></i></a>
-          <a href="skype:liudmila.rehbinder" target="_blank"><i class="fab fa-skype fa-border" ></i></a>
+          <a href="skype:liudmila.rehbinder" target="_blank"><i class="fab fa-skype fa-border"></i></a>
         </span>
       </div>
       <h5 class="section">

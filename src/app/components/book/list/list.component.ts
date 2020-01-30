@@ -42,6 +42,14 @@ export class ListComponent implements OnInit {
               },
       err => { this.state = ControlState.LoadingError; }
     );
+    this.data.changeSubject.subscribe(
+      data => {
+        if (data.ctrl === this.ctrl)
+        {
+          this.items = data.json.items;
+        }
+      }
+    );
   }
 
   scheduleSave()

@@ -32,6 +32,14 @@ export class TextAreaComponent implements OnInit {
               },
       err => { this.state = ControlState.LoadingError; }
     );
+    this.data.changeSubject.subscribe(
+      data => {
+        if (data.ctrl === this.ctrl)
+        {
+          this.text = data.json.text;
+        }
+      }
+    );
   }
 
   scheduleSave()

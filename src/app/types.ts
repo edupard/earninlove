@@ -8,13 +8,13 @@ export enum ErrorType {
   Generic = 6,
 }
 
-export interface SetDataCommand {
+export interface SetControlDataCommand {
   email: string;
   ctrl: string;
   json: any;
 }
 
-export interface SetDataCommandResponse {
+export interface SetControlDataResponse {
   success: boolean;
 }
 
@@ -30,17 +30,6 @@ export interface UserData {
 
 export interface GetUserDataCommand {
   email: string;
-}
-
-export interface GetDataCommand {
-  email: string;
-  ctrl: string;
-}
-
-export interface GetDataCommandResponse {
-  email: string;
-  ctrl: string;
-  json: any;
 }
 
 export interface Attributes {
