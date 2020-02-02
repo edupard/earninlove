@@ -4,6 +4,7 @@ import { DataService } from '../../../services/data.service'
 import { Emoji, ControlState } from "../../../types"
 import {Observable} from 'rxjs/Rx'
 import { timer } from 'rxjs'
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-list',
@@ -13,7 +14,7 @@ import { timer } from 'rxjs'
 export class ListComponent implements OnInit {
 
   @Input('ctrl') ctrl: string;
-  @Input('id') id: number = 0;
+  id: string = uuid();
 
   @Input('placeholder')  placeholder: string;
 

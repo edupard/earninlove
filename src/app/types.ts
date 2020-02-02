@@ -29,7 +29,7 @@ export interface UserData {
 }
 
 export interface ControlDataChangeEvent {
-  id: number;
+  id: string;
   data: ControlData;
 }
 
