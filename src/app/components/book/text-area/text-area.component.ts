@@ -3,6 +3,7 @@ import { DataService } from '../../../services/data.service'
 import {Observable} from 'rxjs/Rx'
 import { ControlState } from "../../../types"
 import { timer } from 'rxjs'
+import { v4 as uuid } from 'uuid';
 
 @Component({
   selector: 'app-text-area',
@@ -12,7 +13,7 @@ import { timer } from 'rxjs'
 export class TextAreaComponent implements OnInit {
 
   @Input('ctrl') ctrl: string;
-  @Input('id') id: number;
+  id: string = uuid();
 
   @Input('minHeight') minHeight = 10;
 
