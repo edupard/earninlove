@@ -12,6 +12,7 @@ import { timer } from 'rxjs'
 export class TextAreaComponent implements OnInit {
 
   @Input('ctrl') ctrl: string;
+  @Input('id') id: number;
 
   @Input('minHeight') minHeight = 10;
 
@@ -32,11 +33,11 @@ export class TextAreaComponent implements OnInit {
               },
       err => { this.state = ControlState.LoadingError; }
     );
-    this.data.changeSubject.subscribe(
-      data => {
-        if (data.ctrl === this.ctrl)
+    this.data.controlDataChangeSubject.subscribe(
+      event => {
+        if (event.data.ctrl === this.ctrl && event.id !== this.id)
         {
-          this.text = data.json.text;
+          this.text = event.data.json.text;
         }
       }
     );
@@ -48,7 +49,7 @@ export class TextAreaComponent implements OnInit {
     if (this.saveSubscription !== undefined) { this.saveSubscription.unsubscribe(); }
     this.saveSubscription = timer(5000).subscribe(t=>{
       this.state = ControlState.Saving;
-      this.data.setData(this.ctrl, { text: this.text})
+      this.data.setData(this.ctrl, this.id, { text: this.text})
       .subscribe(
         data => { this.state = ControlState.UpToDate; },
         err => { this.state = ControlState.Error; }
