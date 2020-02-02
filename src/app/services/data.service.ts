@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service'
 import { HttpClient } from '@angular/common/http';
-import { SetControlDataCommand, SetControlDataResponse, UserData, GetUserDataCommand, ControlData} from '../types'
+import { SetControlDataCommand, SetControlDataResponse, UserData, GetUserDataCommand, ControlData, ControlDataChangeEvent} from '../types'
 import { User, CreateUserCommand, CreateUserCommandResponse} from '../types'
 import { from, Observable, Subject } from 'rxjs';
 import { shareReplay,flatMap, map } from 'rxjs/operators';
@@ -13,7 +13,7 @@ export class DataService {
 
   private apiUrl:string = 'https://fbq7kpo0t6.execute-api.us-east-1.amazonaws.com/prd'
   private cache: Observable<UserData>;
-  public changeSubject: Subject<ControlData> = new Subject<ControlData>();
+  public controlDataChangeSubject: Subject<ControlDataChangeEvent> = new Subject<ControlDataChangeEvent>();
 
   constructor(private auth: AuthService,
               private http: HttpClient) { }
@@ -39,7 +39,7 @@ export class DataService {
     );
   }
 
-  setData(ctrl, json): Observable<SetControlDataResponse> {
+  setData(ctrl, id, json): Observable<SetControlDataResponse> {
     let getUserObservable = from(this.auth.getCurrentUser());
 
     const setDataForUser = flatMap((user: User) => {
@@ -48,7 +48,7 @@ export class DataService {
     });
     let observable = setDataForUser(getUserObservable);
     observable.subscribe(
-      next => this.changeSubject.next({ctrl: ctrl, json: json})
+      next => this.controlDataChangeSubject.next({id: id, data: {ctrl: ctrl, json: json}})
     );
     return observable;
   }

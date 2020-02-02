@@ -13,6 +13,7 @@ import { timer } from 'rxjs'
 export class ListComponent implements OnInit {
 
   @Input('ctrl') ctrl: string;
+  @Input('id') id: number = 0;
 
   @Input('placeholder')  placeholder: string;
 
@@ -42,11 +43,11 @@ export class ListComponent implements OnInit {
               },
       err => { this.state = ControlState.LoadingError; }
     );
-    this.data.changeSubject.subscribe(
-      data => {
-        if (data.ctrl === this.ctrl)
+    this.data.controlDataChangeSubject.subscribe(
+      event => {
+        if (event.data.ctrl === this.ctrl && event.id !== this.id)
         {
-          this.items = data.json.items;
+          this.items = event.data.json.items;
         }
       }
     );
@@ -58,7 +59,7 @@ export class ListComponent implements OnInit {
     if (this.saveSubscription !== undefined) { this.saveSubscription.unsubscribe(); }
     this.saveSubscription = timer(5000).subscribe(t=>{
       this.state = ControlState.Saving;
-      this.data.setData(this.ctrl, { items: this.items})
+      this.data.setData(this.ctrl, this.id, { items: this.items})
       .subscribe(
         data => { this.state = ControlState.UpToDate; },
         err => { this.state = ControlState.Error; }

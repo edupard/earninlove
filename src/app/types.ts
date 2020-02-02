@@ -28,6 +28,11 @@ export interface UserData {
   items: ControlData[];
 }
 
+export interface ControlDataChangeEvent {
+  id: number;
+  data: ControlData;
+}
+
 export interface GetUserDataCommand {
   email: string;
 }
