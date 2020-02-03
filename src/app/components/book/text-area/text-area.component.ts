@@ -26,12 +26,12 @@ export class TextAreaComponent implements OnInit {
 
   ngOnInit() {
     this.state = ControlState.Loading;
-    this.data.getData(this.ctrl)
-    .subscribe(
-      data => {
-                this.text = (data === undefined) ? "": data.json.text;
-                this.state = ControlState.UpToDate;
-              },
+    this.data.reloadDataSubject.subscribe(
+      userData => {
+        let data = userData.items.find(i=>i.ctrl === this.ctrl);
+        this.text = (data === undefined) ? "": data.json.text;
+        this.state = ControlState.UpToDate;
+      },
       err => { this.state = ControlState.LoadingError; }
     );
     this.data.controlDataChangeSubject.subscribe(

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Auth } from 'aws-amplify';
+import { DataService } from '../../services/data.service'
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'book',
@@ -9,16 +10,17 @@ import { Auth } from 'aws-amplify';
 })
 export class BookComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private data: DataService,
+              private auth: AuthService) {
   }
 
   ngOnInit() {
+    this.data.loadUserData();
   }
 
   onLogout() {
-    Auth.signOut()
-      .then(data => console.log(data))
-      .catch(err => console.log(err));
+    this.auth.logout();
     this.router.navigateByUrl('/login');
   }
 

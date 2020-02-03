@@ -35,15 +35,24 @@ export class ListComponent implements OnInit {
   constructor(private data: DataService) { }
 
   ngOnInit() {
+    // console.log("listctrl-init!!!");
     this.state = ControlState.Loading;
-    this.data.getData(this.ctrl)
-    .subscribe(
-      data => {
-                this.items = (data === undefined) ? []: data.json.items;
-                this.state = ControlState.UpToDate;
-              },
+    this.data.reloadDataSubject.subscribe(
+      userData => {
+        let data = userData.items.find(i=>i.ctrl === this.ctrl);
+        this.items = (data === undefined) ? []: data.json.items;
+        this.state = ControlState.UpToDate;
+      },
       err => { this.state = ControlState.LoadingError; }
     );
+    // this.data.getData(this.ctrl)
+    // .subscribe(
+    //   data => {
+    //             this.items = (data === undefined) ? []: data.json.items;
+    //             this.state = ControlState.UpToDate;
+    //           },
+    //   err => { this.state = ControlState.LoadingError; }
+    // );
     this.data.controlDataChangeSubject.subscribe(
       event => {
         if (event.data.ctrl === this.ctrl && event.id !== this.id)

@@ -58,6 +58,13 @@ export class AuthService {
     return Auth.currentAuthenticatedUser({ bypassCache: false});
   }
 
+  async logout() {
+    Auth.signOut()
+      .then(data => { 
+      })
+      .catch(err => console.log(err));
+  }
+
   async login(email, password): Promise<ErrorType> {
     try {
       this.user = await Auth.signIn(email, password);

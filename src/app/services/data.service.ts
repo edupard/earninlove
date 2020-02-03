@@ -12,32 +12,49 @@ import { shareReplay,flatMap, map } from 'rxjs/operators';
 export class DataService {
 
   private apiUrl:string = 'https://fbq7kpo0t6.execute-api.us-east-1.amazonaws.com/prd'
-  private cache: Observable<UserData>;
+  // private cache: Observable<UserData>;
   public controlDataChangeSubject: Subject<ControlDataChangeEvent> = new Subject<ControlDataChangeEvent>();
+  public reloadDataSubject: Subject<UserData> = new Subject<UserData>();
 
   constructor(private auth: AuthService,
               private http: HttpClient) { }
 
-  requestUserData(): Observable<UserData> {
-    let user = from(this.auth.getCurrentUser());
-
-    const proceed = flatMap((user: User) => {
+  async loadUserData() {
+    try {
+      let user = await this.auth.getCurrentUser();
       let command: GetUserDataCommand = { email : user.attributes.email };
-      return this.http.post<UserData>(`${this.apiUrl}/data/get`, command);
-    });
-    return proceed(user);
-  }
-
-  getData(ctrl): Observable<ControlData> {
-    if (!this.cache) {
-      this.cache = this.requestUserData().pipe(
-        shareReplay(1)
+      this.http.post<UserData>(`${this.apiUrl}/data/get`, command).subscribe(
+        data=> { this.reloadDataSubject.next(data); },
+        err => { this.reloadDataSubject.error(err); }
       );
     }
-    return this.cache.pipe(
-      map((userData: UserData) => userData.items.find(i=>i.ctrl === ctrl))
-    );
+    catch (err)
+    {
+      this.reloadDataSubject.error(err);
+    }
   }
+
+  // requestUserData(): Observable<UserData> {
+  //   let currentUser = from(this.auth.getCurrentUser());
+
+  //   const proceed = flatMap((user: User) => {
+  //     console.log(user);
+  //     let command: GetUserDataCommand = { email : user.attributes.email };
+  //     return this.http.post<UserData>(`${this.apiUrl}/data/get`, command);
+  //   });
+  //   return proceed(currentUser);
+  // }
+
+  // getData(ctrl): Observable<ControlData> {
+  //   if (!this.cache) {
+  //     this.cache = this.requestUserData().pipe(
+  //       shareReplay(1)
+  //     );
+  //   }
+  //   return this.cache.pipe(
+  //     map((userData: UserData) => userData.items.find(i=>i.ctrl === ctrl))
+  //   );
+  // }
 
   setData(ctrl, id, json): Observable<SetControlDataResponse> {
     let getUserObservable = from(this.auth.getCurrentUser());
