@@ -34,28 +34,6 @@ export class DataService {
     }
   }
 
-  // requestUserData(): Observable<UserData> {
-  //   let currentUser = from(this.auth.getCurrentUser());
-
-  //   const proceed = flatMap((user: User) => {
-  //     console.log(user);
-  //     let command: GetUserDataCommand = { email : user.attributes.email };
-  //     return this.http.post<UserData>(`${this.apiUrl}/data/get`, command);
-  //   });
-  //   return proceed(currentUser);
-  // }
-
-  // getData(ctrl): Observable<ControlData> {
-  //   if (!this.cache) {
-  //     this.cache = this.requestUserData().pipe(
-  //       shareReplay(1)
-  //     );
-  //   }
-  //   return this.cache.pipe(
-  //     map((userData: UserData) => userData.items.find(i=>i.ctrl === ctrl))
-  //   );
-  // }
-
   setData(ctrl, id, json): Observable<SetControlDataResponse> {
     let getUserObservable = from(this.auth.getCurrentUser());
 

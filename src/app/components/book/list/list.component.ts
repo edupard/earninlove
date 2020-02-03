@@ -35,7 +35,6 @@ export class ListComponent implements OnInit {
   constructor(private data: DataService) { }
 
   ngOnInit() {
-    // console.log("listctrl-init!!!");
     this.state = ControlState.Loading;
     this.data.reloadDataSubject.subscribe(
       userData => {
@@ -45,14 +44,6 @@ export class ListComponent implements OnInit {
       },
       err => { this.state = ControlState.LoadingError; }
     );
-    // this.data.getData(this.ctrl)
-    // .subscribe(
-    //   data => {
-    //             this.items = (data === undefined) ? []: data.json.items;
-    //             this.state = ControlState.UpToDate;
-    //           },
-    //   err => { this.state = ControlState.LoadingError; }
-    // );
     this.data.controlDataChangeSubject.subscribe(
       event => {
         if (event.data.ctrl === this.ctrl && event.id !== this.id)
