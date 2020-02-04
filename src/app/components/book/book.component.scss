@@ -77,23 +77,35 @@ p { text-indent: 2rem }
 
 .logout { position:fixed; top:0; right:0; }
 
+.star-list {
+  padding: 0px;
+  list-style-type: none;
+}
 
+.star-list li {
+  margin-top: 24px;
+  padding-left: 2rem;
+  background-image: url(star.png);
+  background-position: 0 0;
+  background-size: 1.6rem 1.6rem;
+  background-repeat: no-repeat;
+}
 
 /* List */
-.pretty-list ul {
+.numbered-list ul {
   counter-reset: index;
   padding: 0px;
 }
 
-.pretty-list p { text-indent: 0px; }
+.numbered-list p { text-indent: 0px; }
 
-.pretty-list ol {
+.numbered-list {
   counter-reset: index;
   padding: 0px;
 }
 
 /* List element */
-.pretty-list li {
+.numbered-list li {
   counter-increment: index;
   display: flex;
   align-items: center;
@@ -101,7 +113,7 @@ p { text-indent: 2rem }
   box-sizing: border-box;
 }
 
-.pretty-list li::before {
+.numbered-list li::before {
   content: counters(index, ".", decimal-leading-zero);
   font-size: 1.5rem;
   text-align: right;
@@ -117,7 +129,7 @@ p { text-indent: 2rem }
 
 
 /* Element separation */
-.pretty-list li + li {
+.numbered-list li + li {
   border-top: 1px solid rgba(255,255,255,0.2);
 }
 
